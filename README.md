@@ -4,7 +4,7 @@ PokeTs é uma <a href="https://pt.wikipedia.org/wiki/Lista_de_Pok%C3%A9mon">Poke
 
 Desenvolvi essa aplicação com o intuito de estudar um pouco mais sobre Typescript cujo ultimamente tem me atraído bastante
 
-Para acessar a pokedex online basta clicar <a href="">aqui</a>
+Para acessar a pokedex online basta clicar <a href="https://pokedex-online.vercel.app/">aqui</a>
 
 ![image](https://user-images.githubusercontent.com/55189046/103176632-229a7c80-4852-11eb-946b-d9f877a132b0.png)
 
