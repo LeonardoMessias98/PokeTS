@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import poke_bg from "../../assets/background.png";
 
@@ -31,6 +31,13 @@ export const Container = styled.div`
         border-radius: 8px;
       }
 
+      p.poke_index {
+        font-family: "Roboto";
+        width: 100%;
+        font-size: 12px;
+        padding: 10px 0 5px 0;
+      }
+
       img {
         width: 200px;
         height: 200px;
@@ -38,7 +45,7 @@ export const Container = styled.div`
 
       h4 {
         width: 100%;
-        padding: 10px 0;
+        padding: 0 0 10px 0 ;
         font-family: Roboto, sans-serif;
       }
 
@@ -107,6 +114,26 @@ export const Container = styled.div`
         .dark {
           background: #754;
         }
+
+        .psychic {
+          background: #f85888;
+        }
+
+        .fighting {
+          background: #c03028;
+        }
+
+        .ghost {
+          background: #705898;
+        }
+
+        .dragon {
+          background: #7038f8;
+        }
+
+        .rock {
+          background: #a38c21;
+        }
       }
     }
   }
@@ -124,10 +151,22 @@ export const Header = styled.header`
   width: 100%;
   height: 90px;
 
-  h1 {
-    font-family: Roboto, sans-serif;
-    color: #fff;
-    margin-bottom: 5px;
+  .title {
+    display: flex;
+
+    h1 {
+      font-family: Roboto, sans-serif;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    img {
+      width: 40px;
+      height: 38px;
+    }
+  }
+
+  .loading {
+    animation: loading 2s ease infinite;
   }
 
   .buttons {
@@ -145,6 +184,15 @@ export const Header = styled.header`
       border-radius: 4px;
       color: #fff;
       width: 70px;
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(2880deg);
     }
   }
 `;
