@@ -92,7 +92,7 @@ const MainList = () => {
 
       <div className="renderList">
         {pokemons?.map((pokemon: any) => (
-          <List pokemon={pokemon} />
+          <List key={pokemon.id} pokemon={pokemon} />
         ))}
       </div>
 

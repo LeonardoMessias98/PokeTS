@@ -8,6 +8,9 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  height: max-content;
+  padding: 40px 0;
+
   background: url(${poke_bg});
   background-repeat: no-repeat;
   background-size: cover;
@@ -82,7 +85,7 @@ export const Header = styled.header`
 `;
 
 export const Footer = styled.footer`
-  height: 300px;
+  height: 200px;
   background: #242424;
   width: 100%;
   display: flex;
