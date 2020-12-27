@@ -9,7 +9,6 @@ export const Container = styled.div`
   align-items: center;
 
   height: max-content;
-  padding: 40px 0;
 
   background: url(${poke_bg});
   background-repeat: no-repeat;
