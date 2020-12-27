@@ -18,124 +18,6 @@ export const Container = styled.div`
     justify-content: center;
     max-width: 1200px;
     margin-top: 120px;
-
-    .list {
-      margin: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      figure {
-        background: #f2f2f2;
-        border-radius: 8px;
-      }
-
-      p.poke_index {
-        font-family: "Roboto";
-        width: 100%;
-        font-size: 12px;
-        padding: 10px 0 5px 0;
-      }
-
-      img {
-        width: 200px;
-        height: 200px;
-      }
-
-      h4 {
-        width: 100%;
-        padding: 0 0 10px 0 ;
-        font-family: Roboto, sans-serif;
-      }
-
-      .types {
-        width: 100%;
-        display: flex;
-
-        .type {
-          justify-content: flex-start;
-          margin-right: 5px;
-          border-radius: 4px;
-          padding: 2px 7px;
-          font-family: Roboto, sans-serif;
-          color: #fff;
-        }
-
-        .grass {
-          background: #8bc34a;
-        }
-
-        .poison {
-          background: #d000bd;
-        }
-
-        .fire {
-          background: #f44336;
-        }
-
-        .water {
-          background: #2196f3;
-        }
-
-        .bug {
-          background: #4caf50;
-        }
-
-        .normal {
-          background: #9e9e9e;
-        }
-
-        .flying {
-          background: #89f;
-        }
-
-        .ground {
-          background: #dcba55;
-        }
-
-        .electric {
-          background: #ffeb3b;
-          color: #242424;
-        }
-
-        .fairy {
-          background: #ee99ee;
-        }
-
-        .ice {
-          background: #6cf;
-        }
-
-        .steel {
-          background: #aab;
-        }
-
-        .dark {
-          background: #754;
-        }
-
-        .psychic {
-          background: #f85888;
-        }
-
-        .fighting {
-          background: #c03028;
-        }
-
-        .ghost {
-          background: #705898;
-        }
-
-        .dragon {
-          background: #7038f8;
-        }
-
-        .rock {
-          background: #a38c21;
-        }
-      }
-    }
   }
 `;
 
@@ -184,6 +66,8 @@ export const Header = styled.header`
       border-radius: 4px;
       color: #fff;
       width: 70px;
+
+      outline: none;
     }
   }
 

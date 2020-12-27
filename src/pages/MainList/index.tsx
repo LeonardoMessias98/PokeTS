@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
+import List from './components/List';
+
 import api from "../../util/api";
 import pokeball from "../../assets/pokeball_icon.png";
 
@@ -26,7 +28,7 @@ const MainList = () => {
   const page = Number(query.get("page"));
 
   async function getPokemons(page: number) {
-    const pokemons = await api.get(`/pokemon?offset=${page}&limit=20`);
+    const pokemons = await api.get(`/pokemon?offset=${page}&limit=24`);
     setPokemons(
       await Promise.all(
         pokemons.data.results.map((result: any) =>
@@ -37,13 +39,13 @@ const MainList = () => {
   }
 
   useEffect(() => {
-    getPokemons(page * 20 || 0);
+    getPokemons(page * 24 || 0);
   }, [page]);
 
   const navigatePrevious = () => {
     history.push(`/pokemons?page=${page - 1}`);
     setLoader(true);
-    
+
     setTimeout(() => {
       setLoader(false);
     }, 2000);
@@ -59,8 +61,8 @@ const MainList = () => {
   };
 
   const navigateToMainPage = () => {
-    history.push('/pokemons')
-  }
+    history.push("/pokemons");
+  };
 
   console.log("carreguei");
 
@@ -88,29 +90,7 @@ const MainList = () => {
 
       <div className="renderList">
         {pokemons?.map((pokemon: any) => (
-          <div key={pokemon.id} className="list">
-            <figure>
-              <img
-                src={pokemon.sprites.other["official-artwork"].front_default}
-                alt={pokemon.name}
-              />
-            </figure>
-
-            <p className="poke_index">N° {pokemon.id}</p>
-
-            <h4>
-              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            </h4>
-
-            <section className="types">
-              {pokemon.types.map((type: any) => (
-                <p key={type.type.name} className={`type ${type.type.name}`}>
-                  {type.type.name.charAt(0).toUpperCase() +
-                    type.type.name.slice(1)}
-                </p>
-              ))}
-            </section>
-          </div>
+          <List pokemon={pokemon} />
         ))}
       </div>
     </Container>
