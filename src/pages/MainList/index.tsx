@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import api from "../../../src/util/api";
+import { useLocation, useHistory } from "react-router-dom";
+
+import api from "../../util/api";
+import pokeball from "../../assets/pokeball_icon.png";
 
 import { Container, Header } from "./styles";
 
@@ -10,13 +13,19 @@ interface Pokemons {
   sprites: object;
 }
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 const MainList = () => {
+  const query = useQuery();
+  const history = useHistory();
   const [pokemons, setPokemons] = useState<Pokemons[]>([]);
-  const [page, setPage] = useState<number>(0);
+  const [loader, setLoader] = useState(false);
+
+  const page = Number(query.get("page"));
 
   async function getPokemons(page: number) {
-    setPage(page);
-
     const pokemons = await api.get(`/pokemon?offset=${page}&limit=20`);
     setPokemons(
       await Promise.all(
@@ -28,20 +37,50 @@ const MainList = () => {
   }
 
   useEffect(() => {
-    getPokemons(0);
-  }, []);
+    getPokemons(page * 20 || 0);
+  }, [page]);
+
+  const navigatePrevious = () => {
+    history.push(`/pokemons?page=${page - 1}`);
+    setLoader(true);
+    
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  };
+
+  const navigateNext = () => {
+    history.push(`/pokemons?page=${page + 1}`);
+    setLoader(true);
+
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  };
+
+  const navigateToMainPage = () => {
+    history.push('/pokemons')
+  }
+
+  console.log("carreguei");
 
   return (
     <Container>
       <Header>
-        <h1>Pokedex</h1>
-
+        <div className="title">
+          <img
+            src={pokeball}
+            className={loader ? "loading" : ""}
+            alt="pokeball"
+          />
+          <h1 onClick={navigateToMainPage}>Pokedex</h1>
+        </div>
         <div className="buttons">
-          <button onClick={() => getPokemons(page - 20)} type="button">
+          <button onClick={navigatePrevious} type="button">
             Previous
           </button>
 
-          <button onClick={() => getPokemons(page + 20)} type="button">
+          <button onClick={navigateNext} type="button">
             Next
           </button>
         </div>
@@ -53,9 +92,11 @@ const MainList = () => {
             <figure>
               <img
                 src={pokemon.sprites.other["official-artwork"].front_default}
-                alt=""
+                alt={pokemon.name}
               />
             </figure>
+
+            <p className="poke_index">N° {pokemon.id}</p>
 
             <h4>
               {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
@@ -63,7 +104,7 @@ const MainList = () => {
 
             <section className="types">
               {pokemon.types.map((type: any) => (
-                <p className={`type ${type.type.name}`}>
+                <p key={type.type.name} className={`type ${type.type.name}`}>
                   {type.type.name.charAt(0).toUpperCase() +
                     type.type.name.slice(1)}
                 </p>
