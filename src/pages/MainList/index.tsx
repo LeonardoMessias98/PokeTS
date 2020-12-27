@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
-import List from './components/List';
+import List from "./components/List";
 
 import api from "../../util/api";
 import pokeball from "../../assets/pokeball_icon.png";
+import github from "../../assets/github.png";
+import linkedin from "../../assets/linkedin.png";
 
-import { Container, Header } from "./styles";
+import { Container, Header, Footer } from "./styles";
 
 interface Pokemons {
   name: string;
@@ -93,6 +95,29 @@ const MainList = () => {
           <List pokemon={pokemon} />
         ))}
       </div>
+
+      <Footer>
+        <h2>
+          Desenvolvido por <b>Leonardo Messias</b>
+        </h2>
+
+        <div className="social-network">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.linkedin.com/in/leonardo-messias-89568818a/"
+          >
+            <img src={linkedin} alt="linkedin" className="linkedin" />
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/LeonardoMessias98"
+          >
+            <img src={github} alt="github" className="github" />
+          </a>
+        </div>
+      </Footer>
     </Container>
   );
 };

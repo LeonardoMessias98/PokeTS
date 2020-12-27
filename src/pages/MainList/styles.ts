@@ -80,3 +80,35 @@ export const Header = styled.header`
     }
   }
 `;
+
+export const Footer = styled.footer`
+  height: 300px;
+  background: #242424;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    color: white;
+    font-family: "Roboto";
+  }
+
+  .social-network {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .linkedin {
+    height: 30px;
+  }
+
+  .github {
+    height: 30px;
+  }
+`;
