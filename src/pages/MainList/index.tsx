@@ -17,6 +17,11 @@ interface Pokemons {
   sprites: object;
 }
 
+interface PokeResult {
+  name: string;
+  url: string;
+}
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -31,9 +36,10 @@ const MainList = () => {
 
   async function getPokemons(page: number) {
     const pokemons = await api.get(`/pokemon?offset=${page}&limit=24`);
+    
     setPokemons(
       await Promise.all(
-        pokemons.data.results.map((result: any) =>
+        pokemons.data.results.map((result: PokeResult) =>
           api.get(result.url).then((Response) => Response.data)
         )
       )
@@ -65,8 +71,6 @@ const MainList = () => {
   const navigateToMainPage = () => {
     history.push("/pokemons");
   };
-
-  console.log("carreguei");
 
   return (
     <Container>

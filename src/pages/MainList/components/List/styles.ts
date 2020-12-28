@@ -111,7 +111,8 @@ export const Container = styled.div`
       font-family: "Roboto";
       width: 100%;
       font-size: 12px;
-      padding: 10px 0 5px 0;
+      padding: 10px 0 0 0;
+      margin-bottom: 0;
     }
 
     img {
@@ -123,6 +124,7 @@ export const Container = styled.div`
       width: 100%;
       padding: 0 0 10px 0;
       font-family: Roboto, sans-serif;
+      margin-bottom: 0;
     }
   }
 `;

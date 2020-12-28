@@ -55,29 +55,33 @@ const Poke = () => {
 
   return (
     <Container>
-      <div className={`center list-${pokemon?.types[0].type.name}`}>
-        <figure>
-          <img
-            src={pokemon?.sprites.other["official-artwork"].front_default}
-            alt="poke_img"
-          />
-        </figure>
+      <div className="content">
+        <div className={`center list-${pokemon?.types[0].type.name}`}>
+          <figure>
+            <img
+              src={pokemon?.sprites.other["official-artwork"].front_default}
+              alt="poke_img"
+            />
+          </figure>
 
-        <div className="poke-info">
-          <h1>{`${pokemon?.name?.charAt(0)?.toUpperCase()}${pokemon?.name.slice(
-            1
-          )}`}</h1>
-          <p>N° {pokemon?.id}</p>
+          <div className="poke-info">
+            <h1>{`${pokemon?.name
+              ?.charAt(0)
+              ?.toUpperCase()}${pokemon?.name.slice(1)}`}</h1>
+            <p>N° {pokemon?.id}</p>
+          </div>
+
+          <PokeTypesComponent types={pokemon?.types} />
         </div>
-
-        <PokeTypesComponent types={pokemon?.types} />
+        
+        <div className="otherInfos">
+          <h1>Info</h1>
+          
+          <Stats stats={pokemonStats} />
+        </div>
       </div>
 
-      <Stats stats={pokemonStats} />
-
-      <div className="evolutions">
-
-      </div>
+      <div className="evolutions"></div>
     </Container>
   );
 };
