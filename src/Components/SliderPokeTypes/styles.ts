@@ -15,6 +15,7 @@ export const Container = styled.div`
 
   .slick-list {
     width: 50vw;
+    max-width: 630px;
     padding: 20px 20px 5px 20px;
     margin-left: 20px;
   }
