@@ -31,6 +31,7 @@ export const Container = styled.div`
       font-weight: 600;
       border: none;
       font-family: "Bungee";
+      margin: 40px;
     }
   }
 `;
