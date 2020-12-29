@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 import List from "./components/List";
+import { Button } from 'antd';
 
 import api from "../../util/api";
+import SliderPokeTypes from "../../Components/SliderPokeTypes";
 import pokeball from "../../assets/pokeball_icon.png";
 import github from "../../assets/github.png";
 import linkedin from "../../assets/linkedin.png";
@@ -22,21 +23,15 @@ interface PokeResult {
   url: string;
 }
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 const MainList = () => {
-  const query = useQuery();
   const history = useHistory();
   const [pokemons, setPokemons] = useState<Pokemons[]>([]);
   const [loader, setLoader] = useState(false);
+  const [page, setPage] = useState(1);
 
-  const page = Number(query.get("page"));
+  async function getPokemons(page : number) {
+    const pokemons = await api.get(`/pokemon?offset=0&limit=${page * 24}`);
 
-  async function getPokemons(page: number) {
-    const pokemons = await api.get(`/pokemon?offset=${page}&limit=24`);
-    
     setPokemons(
       await Promise.all(
         pokemons.data.results.map((result: PokeResult) =>
@@ -47,21 +42,13 @@ const MainList = () => {
   }
 
   useEffect(() => {
-    getPokemons(page * 24 || 0);
-  }, [page]);
-
-  const navigatePrevious = () => {
-    history.push(`/pokemons?page=${page - 1}`);
-    setLoader(true);
-
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-  };
+    getPokemons(1);
+  }, []);
 
   const navigateNext = () => {
-    history.push(`/pokemons?page=${page + 1}`);
     setLoader(true);
+    getPokemons(page + 1)
+    setPage(page + 1);
 
     setTimeout(() => {
       setLoader(false);
@@ -81,23 +68,26 @@ const MainList = () => {
             className={loader ? "loading" : ""}
             alt="pokeball"
           />
-          <h1 onClick={navigateToMainPage}>Pokedex</h1>
+          <h1 onClick={navigateToMainPage}>PoKeDeX</h1>
         </div>
-        <div className="buttons">
-          <button onClick={navigatePrevious} type="button">
-            Previous
-          </button>
 
-          <button onClick={navigateNext} type="button">
-            Next
-          </button>
+        <SliderPokeTypes />
+
+        <div className="buttons">
+          <button type="button" />
+          <button type="button" className="btn-center" />
+          <button type="button" />
         </div>
       </Header>
 
       <div className="renderList">
-        {pokemons?.map((pokemon: any) => (
-          <List key={pokemon.id} pokemon={pokemon} />
-        ))}
+        <div className="content">
+          {pokemons?.map((pokemon: any) => (
+            <List key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
+
+        <Button onClick={navigateNext} loading={loader}>Carregar mais</Button>
       </div>
 
       <Footer>

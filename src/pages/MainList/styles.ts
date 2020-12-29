@@ -1,25 +1,37 @@
 import styled from "styled-components";
 
-import poke_bg from "../../assets/background.png";
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   height: max-content;
-
-  background: url(${poke_bg});
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: #313b72;
 
   .renderList {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
-    max-width: 1200px;
-    margin-top: 120px;
+    align-items: center;
+    background: linear-gradient(to bottom, #020a32, #3f51b5);
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      background: transparent;
+    }
+
+    button.ant-btn {
+      width: 200px;
+      background: #ee1c1f;
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      font-family: "Bungee";
+    }
   }
 `;
 
@@ -28,18 +40,20 @@ export const Header = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 0;
-  background: #00000082;
-  backdrop-filter: blur(6px);
+  background: #020a32;
   width: 100%;
-  height: 90px;
+  padding: 20px;
 
   .title {
     display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
 
     h1 {
-      font-family: Roboto, sans-serif;
+      font-size: 30px;
+      font-smooth: never;
+      -webkit-font-smoothing: none;
+      font-family: Bungee, monospace;
       color: #fff;
       margin-bottom: 5px;
     }
@@ -61,15 +75,26 @@ export const Header = styled.header`
     button {
       background: #ff2222;
       border: none;
-      margin: 0 5px;
+      width: 40vw;
+      cursor: default;
       padding: 2px 5px;
-      font-family: "Roboto";
-      font-weight: 500;
-      border-radius: 4px;
-      color: #fff;
-      width: 70px;
+      margin: 0 5px;
+    }
 
-      outline: none;
+    button.btn-center {
+      background: #ff2222;
+      width: 40px;
+      padding: 5px;
+      margin: 10px 5px 0 5px;
+      border-radius: 12px;
+    }
+
+    button:first-child {
+      border-radius: 6px 12px 0px 6px;
+    }
+
+    button:last-child {
+      border-radius: 12px 6px 6px 0;
     }
   }
 
@@ -85,7 +110,7 @@ export const Header = styled.header`
 
 export const Footer = styled.footer`
   height: 200px;
-  background: #242424;
+  background: #313b72;
   width: 100%;
   display: flex;
   flex-direction: column;
