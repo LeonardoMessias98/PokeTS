@@ -72,6 +72,8 @@ export const Header = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    height: 40px;
 
     button {
       background: #ff2222;
@@ -82,12 +84,11 @@ export const Header = styled.header`
       margin: 0 5px;
     }
 
-    button.btn-center {
-      background: #ff2222;
-      width: 40px;
-      padding: 5px;
+    img.center {
+      width: 80px;
       margin: 10px 5px 0 5px;
       border-radius: 12px;
+      cursor: pointer;
     }
 
     button:first-child {

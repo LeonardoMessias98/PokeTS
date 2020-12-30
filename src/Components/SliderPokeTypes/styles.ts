@@ -5,6 +5,7 @@ export const Container = styled.div`
     width: max-content !important;
     border-radius: 50%;
     padding: 10px;
+    margin: 0 !important;
     cursor: pointer;
 
     img {
@@ -14,23 +15,31 @@ export const Container = styled.div`
   }
 
   .slick-list {
-    width: 50vw;
-    max-width: 630px;
+    width: 80vw;
+    max-width: 800px;
     padding: 20px 20px 5px 20px;
-    margin-left: 20px;
+    margin-bottom: -20px;
   }
 
   .slick-arrow {
     display: block;
     height: 100%;
-    width: 20%;
+    width: 25%;
+  }
+
+  .slick-slide {
+    > div {
+      display: flex;
+      justify-content: center;
+      padding: 11px;
+    }
   }
 
   .slick-next {
-    background: linear-gradient(270deg, #020b33e6 40%, #020b33bd, transparent);
+    background: linear-gradient(270deg, #020b33 40%, #020b33bd, transparent);
   }
   .slick-prev {
-    background: linear-gradient(90deg, #020b33e6 40%, #020b33bd, transparent);
+    background: linear-gradient(90deg, #020b33 40%, #020b33bd, transparent);
     z-index: 1;
   }
 

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Button } from "antd";
+
 import List from "./components/List";
-import { Button } from 'antd';
+import Triangle from "./components/Triangle";
 
 import api from "../../util/api";
 import SliderPokeTypes from "../../Components/SliderPokeTypes";
 import pokeball from "../../assets/pokeball_icon.png";
 import github from "../../assets/github.png";
 import linkedin from "../../assets/linkedin.png";
+import pokedex from "../../assets/pokedex.png";
 
 import { Container, Header, Footer } from "./styles";
 
@@ -29,7 +32,7 @@ const MainList = () => {
   const [loader, setLoader] = useState(false);
   const [page, setPage] = useState(1);
 
-  async function getPokemons(page : number) {
+  async function getPokemons(page: number) {
     const pokemons = await api.get(`/pokemon?offset=0&limit=${page * 24}`);
 
     setPokemons(
@@ -47,12 +50,16 @@ const MainList = () => {
 
   const navigateNext = () => {
     setLoader(true);
-    getPokemons(page + 1)
+    getPokemons(page + 1);
     setPage(page + 1);
 
     setTimeout(() => {
       setLoader(false);
     }, 2000);
+  };
+
+  const toggleActivePokedex = () => {
+    document.querySelector('.arrow-down')?.classList.toggle('hidden');
   };
 
   const navigateToMainPage = () => {
@@ -68,14 +75,15 @@ const MainList = () => {
             className={loader ? "loading" : ""}
             alt="pokeball"
           />
-          <h1 onClick={navigateToMainPage}>PoKeDeX</h1>
+          <h1 onClick={navigateToMainPage}>PoKéDeX</h1>
         </div>
 
         <SliderPokeTypes />
+        <Triangle />
 
         <div className="buttons">
           <button type="button" />
-          <button type="button" className="btn-center" />
+          <img src={pokedex} className="center" alt="pokedex" onClick={toggleActivePokedex} />
           <button type="button" />
         </div>
       </Header>
@@ -87,7 +95,9 @@ const MainList = () => {
           ))}
         </div>
 
-        <Button onClick={navigateNext} loading={loader}>Carregar mais</Button>
+        <Button onClick={navigateNext} loading={loader}>
+          Carregar mais
+        </Button>
       </div>
 
       <Footer>

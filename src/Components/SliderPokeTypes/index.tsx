@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 
 import bugType from "../../assets/icons/bug.svg";
@@ -20,21 +20,52 @@ import iceType from "../../assets/icons/ice.svg";
 import electricType from "../../assets/icons/electric.svg";
 import poisonType from "../../assets/icons/poison.svg";
 
-import { Container } from './styles';
+import { Container } from "./styles";
 
 const SliderPokeTypes = () => {
+  const width = window.innerWidth;
+
   const settings = {
     arrow: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: width <= 500 ? 3 : 5,
     slidesToScroll: 1,
+    centerMode: true,
+  };
+
+  const [mainTypeIndex, setMainTypeIndex] = useState(0);
+  const arrowDownDiv = document.querySelector(".arrow-down");
+
+  useEffect(() => {
+    if (mainTypeIndex) {
+      const types = document.querySelectorAll(".slick-slide > div > figure");
+      const pokeClassName =
+        types[mainTypeIndex + (width <= 500 ? 2 : 4)].className;
+
+      if (arrowDownDiv) {
+        arrowDownDiv.id = pokeClassName;
+      }
+    }
+  }, [mainTypeIndex, arrowDownDiv, width]);
+
+  const handleAfterChange = (e: any) => {
+    setMainTypeIndex(e + 2);
+    document.querySelector(".arrow-down")?.classList.remove("hidden");
+  };
+
+  const handleBeforeChange = () => {
+    document.querySelector(".arrow-down")?.classList.add("hidden");
   };
 
   return (
     <Container>
       {" "}
-      <Slider {...settings}>
+      <Slider
+        {...settings}
+        beforeChange={handleBeforeChange}
+        afterChange={handleAfterChange}
+      >
         <figure className="bug">
           <img src={bugType} alt="bug-type" />
         </figure>
@@ -106,15 +137,6 @@ const SliderPokeTypes = () => {
         <figure className="poison">
           <img src={poisonType} alt="poison-type" />
         </figure>
-
-        <figure className="bug">
-          <img src={bugType} alt="bug-type" />
-        </figure>
-
-        <figure className="bug">
-          <img src={bugType} alt="bug-type" />
-        </figure>
-
       </Slider>
     </Container>
   );
