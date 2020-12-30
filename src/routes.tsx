@@ -1,17 +1,17 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import MainList from "./pages/MainList";
+import MainPage from "./pages/MainPage";
 import Poke from "./pages/Poke";
-import Main from "./pages/Main";
+import Initial from "./pages/Initial";
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/pokemons" component={MainList} />
-        <Route path="/pokemons/:page" component={MainList} />
+        <Route path="/" exact component={Initial} />
+        <Route path="/pokemons" component={MainPage} />
+        <Route path="/pokemons/:page" component={MainPage} />
         <Route path="/poke/:poke" component={Poke} />
       </Switch>
     </BrowserRouter>

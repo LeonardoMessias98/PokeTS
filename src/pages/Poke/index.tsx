@@ -47,7 +47,6 @@ const Poke = () => {
   useEffect(() => {
     api.get(`/pokemon/${poke}`).then((Response) => {
       setPokemon(Response.data);
-      console.log(Response);
     });
   }, [poke]);
 

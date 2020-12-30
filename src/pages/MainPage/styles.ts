@@ -49,6 +49,7 @@ export const Header = styled.header`
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    margin-bottom: 20px;
 
     h1 {
       font-size: 30px;

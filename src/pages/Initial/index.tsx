@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const Main = () => {
+const Initial = () => {
   const history = useHistory();
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const Main = () => {
   return <div />;
 };
 
-export default Main;
+export default Initial;

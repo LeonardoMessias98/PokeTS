@@ -26,9 +26,11 @@ interface PokeResult {
   url: string;
 }
 
-const MainList = () => {
+const MainPage = () => {
   const history = useHistory();
   const [pokemons, setPokemons] = useState<Pokemons[]>([]);
+  const [filterByPokeType, setFilterByPokeType] = useState(false);
+  const [pokeType, setPokeType] = useState("default");
   const [loader, setLoader] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -48,18 +50,56 @@ const MainList = () => {
     getPokemons(1);
   }, []);
 
-  const navigateNext = () => {
+  useEffect(() => {
+    async function getPokemonByType() {
+      if (filterByPokeType) {
+        const typeReponse = await api.get("https://pokeapi.co/api/v2/type/");
+
+        const typeResultsFiltered = typeReponse.data.results.filter(
+          (result: any) => result.name === pokeType
+        );
+
+        if (!typeResultsFiltered) return;
+
+        const pokesByType = await api.get(typeResultsFiltered[0]?.url);
+
+        if (pokesByType?.data?.pokemon) {
+          setLoader(true);
+          setPokemons(
+            await Promise.all(
+              pokesByType?.data?.pokemon?.map((poke: any) =>
+                api.get(poke.pokemon.url).then((Response) => Response.data)
+              )
+            )
+          );
+          setLoader(false);
+        }
+      } else {
+        getPokemons(1);
+      }
+    }
+
+    getPokemonByType();
+  }, [filterByPokeType, pokeType]);
+
+  const pokeballLoader = () => {
     setLoader(true);
-    getPokemons(page + 1);
-    setPage(page + 1);
 
     setTimeout(() => {
       setLoader(false);
     }, 2000);
   };
 
+  const navigateNext = () => {
+    getPokemons(page + 1);
+    setPage(page + 1);
+
+    pokeballLoader();
+  };
+
   const toggleActivePokedex = () => {
-    document.querySelector('.arrow-down')?.classList.toggle('hidden');
+    setFilterByPokeType(!filterByPokeType);
+    document.querySelector(".arrow-down")?.classList.toggle("hidden");
   };
 
   const navigateToMainPage = () => {
@@ -78,12 +118,21 @@ const MainList = () => {
           <h1 onClick={navigateToMainPage}>PoKéDeX</h1>
         </div>
 
-        <SliderPokeTypes />
+        <SliderPokeTypes
+          loaderPokeball={pokeballLoader}
+          setPokeType={setPokeType}
+          filterTypeIsActive={filterByPokeType}
+        />
         <Triangle />
 
         <div className="buttons">
           <button type="button" />
-          <img src={pokedex} className="center" alt="pokedex" onClick={toggleActivePokedex} />
+          <img
+            src={pokedex}
+            className="center"
+            alt="pokedex"
+            onClick={toggleActivePokedex}
+          />
           <button type="button" />
         </div>
       </Header>
@@ -126,4 +175,4 @@ const MainList = () => {
   );
 };
 
-export default MainList;
+export default MainPage;

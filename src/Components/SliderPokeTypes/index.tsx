@@ -22,7 +22,17 @@ import poisonType from "../../assets/icons/poison.svg";
 
 import { Container } from "./styles";
 
-const SliderPokeTypes = () => {
+interface SliderPokeTypeProps {
+  loaderPokeball: Function;
+  setPokeType: Function;
+  filterTypeIsActive: Boolean;
+}
+
+const SliderPokeTypes: React.FC<SliderPokeTypeProps> = ({
+  loaderPokeball,
+  setPokeType,
+  filterTypeIsActive,
+}) => {
   const width = window.innerWidth;
 
   const settings = {
@@ -43,19 +53,27 @@ const SliderPokeTypes = () => {
       const pokeClassName =
         types[mainTypeIndex + (width <= 500 ? 2 : 4)].className;
 
+      if (setPokeType) {
+        setPokeType(pokeClassName);
+      }
+
       if (arrowDownDiv) {
         arrowDownDiv.id = pokeClassName;
       }
     }
-  }, [mainTypeIndex, arrowDownDiv, width]);
+  }, [mainTypeIndex, arrowDownDiv, width, setPokeType]);
 
   const handleAfterChange = (e: any) => {
     setMainTypeIndex(e + 2);
-    document.querySelector(".arrow-down")?.classList.remove("hidden");
+
+    if (filterTypeIsActive)
+      document.querySelector(".arrow-down")?.classList.remove("hidden");
   };
 
   const handleBeforeChange = () => {
-    document.querySelector(".arrow-down")?.classList.add("hidden");
+    if (filterTypeIsActive) {
+      document.querySelector(".arrow-down")?.classList.add("hidden");
+    }
   };
 
   return (
