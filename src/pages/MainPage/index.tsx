@@ -30,7 +30,7 @@ const MainPage = () => {
   const history = useHistory();
   const [pokemons, setPokemons] = useState<Pokemons[]>([]);
   const [filterByPokeType, setFilterByPokeType] = useState(false);
-  const [pokeType, setPokeType] = useState("default");
+  const [pokeType, setPokeType] = useState("bug");
   const [loader, setLoader] = useState(false);
   const [page, setPage] = useState(1);
 
