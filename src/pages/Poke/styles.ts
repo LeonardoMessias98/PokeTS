@@ -80,7 +80,8 @@ export const Container = styled.div`
 
   .card {
     margin: 20px;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
     background: #0000004f;
     border-radius: 6px 6px 0 0;
 
