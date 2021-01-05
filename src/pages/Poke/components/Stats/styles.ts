@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  justify-content: center;
 
   .stat {
     display: flex;
@@ -9,7 +10,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin: 5px;
-    width: 70px;
+    width: 60px;
 
     h2 {
       text-align: center;
@@ -34,7 +35,7 @@ export const Container = styled.div`
     }
 
     .ant-progress-steps-item {
-      width: 70px !important;
+      width: 50px !important;
       height: 15px !important;
       margin: 2px;
     }
